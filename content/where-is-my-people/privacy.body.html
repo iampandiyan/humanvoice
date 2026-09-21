@@ -38,7 +38,7 @@
     <p>We rely on the following providers to run the App:</p>
     <ul>
         <li><strong>Supabase:</strong> database and account sign-in (authentication).</li>
-        <li><strong>Cloudflare:</strong> hosts the App's server (Cloudflare Workers) and provides the Turnstile bot check that runs invisibly when you sign in, sign up or ask for a password-reset code.</li>
+        <li><strong>Cloudflare:</strong> hosts the App's server (Cloudflare Workers) and provides the Turnstile bot check that runs invisibly when you sign in, sign up or ask for a password-reset code. Turnstile reads a few technical signals from your device, such as your IP address and connection and browser details, only to tell people from automated bots. See Cloudflare's <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener">Turnstile Privacy Addendum</a>.</li>
         <li><strong>Google Firebase Cloud Messaging:</strong> delivers push notifications to your phone, including a silent message that asks the App to update its location.</li>
         <li><strong>Amazon Web Services (Amazon SES):</strong> sends account emails such as the confirmation link and password-reset codes.</li>
         <li><strong>Mapbox:</strong> displays the map. Your phone requests map images from Mapbox.</li>
