@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO and AEO Meta Tags -->
+    <title>Shared AI Budget Tracker Tutorial | The Best Budgeting App</title>
+    <meta name="description" content="Learn how to use Shared AI Budget Tracker, the best Budgeting App for families. Enjoy a secure data safety App that also functions as an offline App. Track your spending with the ultimate expense App.">
+    <meta name="keywords" content="best Budgeting App, the expense App, the offline App, data safety App, family budget tracker, shared AI budget, expense tracker tutorial, personal finance app">
+    
+    <!-- Open Graph for Social Sharing (SEO enhancement) -->
+    <meta property="og:title" content="Shared AI Budget Tracker Tutorial Guide">
+    <meta property="og:description" content="Master your finances with the best Budgeting App. Secure, offline-capable, and perfect for family sharing.">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-area h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-area h1 svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Google Translate customization */
+        #google_translate_element select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .goog-te-gadget {
+            font-family: inherit !important;
+            color: transparent !important;
+        }
+        .goog-te-gadget .goog-te-combo {
+            margin: 0 !important;
+        }
+        .goog-logo-link {
+            display: none !important;
+        }
+        .goog-te-gadget span {
+            display: none !important;
+        }
+
+        /* SEO & Download Section */
+        .hero-section {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+
+        .hero-section strong {
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .app-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fff;
+            color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .store-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            /* 9:16 Aspect ratio for YouTube Shorts */
+            padding-bottom: 177.77%; 
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-caption {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Text Tutorials Section */
+        .tutorials-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .accordion-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: left;
+        }
+
+        .accordion-header .icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .accordion-item.active .accordion-header .icon {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #fcfcfc;
+        }
+
+        .accordion-inner {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .accordion-inner p {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .accordion-inner p::before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .accordion-inner p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .script-subtitle {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .script-subtitle:first-child {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                Shared AI Budget Tutorial Center
+            </h1>
+        </div>
+        <!-- Google Translate Widget -->
+        <div id="google_translate_element"></div>
+    </header>
+
+    <!-- SEO & App Links Hero Section -->
+    <section class="hero-section">
+        <h2>Master Your Finances Today</h2>
+        <p>Looking for the <strong>best Budgeting App</strong>? You've found it. Easily track your spending with <strong>the expense App</strong> designed for families. Enjoy peace of mind knowing it's a highly secure <strong>data safety App</strong> that also functions as <strong>the offline App</strong> so you can manage your money anywhere, anytime.</p>
+        
+        <div class="app-links">
+            <a href="https://play.google.com/store/apps/details?id=com.mepandiyan.sharedaibudget" target="_blank" class="store-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.1,2.6l12.4,12.4l3.8-3.8l-16.2-8.5C3.1,2.6,3.1,2.6,3.1,2.6z M17.2,16.5l-4.1-4.1L3.8,21.8c0.1,0.1,0.2,0.1,0.3,0.1c0.2,0,0.4-0.1,0.6-0.2L17.2,16.5z M18.4,15.6l3.8-2c0.4-0.2,0.4-0.8,0-1l-3.6-1.9l-4.6,4.6L18.4,15.6z M2.6,3.5c-0.1,0.2-0.2,0.5-0.2,0.8v15.5c0,0.3,0.1,0.6,0.2,0.8L12,11.5L2.6,3.5z"/></svg>
+                Android Download
+            </a>
+            <a href="https://apps.apple.com/in/app/shared-ai-budget-tracker/id6765643311" target="_blank" class="store-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5,14.4c-0.1-2.9,2.4-4.3,2.5-4.4c-1.3-1.9-3.4-2.2-4.1-2.2c-1.8-0.2-3.4,1-4.3,1c-0.9,0-2.3-1-3.8-1c-1.9,0-3.7,1.1-4.7,2.8c-2,3.4-0.5,8.5,1.4,11.2c0.9,1.3,2,2.8,3.4,2.8c1.3,0,1.9-0.8,3.5-0.8c1.6,0,2.1,0.8,3.5,0.8c1.5,0,2.4-1.3,3.3-2.6c1.1-1.6,1.6-3.1,1.6-3.2C18.6,18.8,16.6,17.9,16.5,14.4z M14.3,5.5c0.7-0.9,1.2-2.1,1.1-3.3c-1.1,0-2.4,0.7-3.2,1.6c-0.6,0.8-1.2,2-1,3.2C12.4,7.1,13.6,6.4,14.3,5.5z"/></svg>
+                iOS Download
+            </a>
+        </div>
+    </section>
+
+    <div class="main-container">
+        
+        <!-- Part 1: Video Tutorial -->
+        <aside class="video-section">
+            <h2 class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Video Tutorial
+            </h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/RI9im3iQjRw" title="Budget Screen Tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p class="video-caption">Budget Screen Walkthrough</p>
+        </aside>
+
+        <!-- Part 2: Text Tutorials -->
+        <main class="tutorials-section">
+            <h2 class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Step-by-Step Text Tutorials
+            </h2>
+
+            <!-- Budget Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    1. Budget Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="script-subtitle">Private Budget</div>
+                        <p>Want to start tracking expenses? First, create your budget.</p>
+                        <p>In our App, budgeting is the foundation of everything.</p>
+                        <p>Tap Home, open Budgets, and go to Add.</p>
+                        <p>Then select Create Private Budget.</p>
+                        <p>Enter the budget name, initial balance, Start date, End date and currency.</p>
+                        <p>Now add your categories with planned amounts.</p>
+                        <p>You can also add loans and the app automatically shows EMI.</p>
+                        <p>You can also add goals, and the app automatically shows monthly savings.</p>
+                        <p>To save time, copy items from the previous month.</p>
+                        <p>Tap Save, and your budget is ready.</p>
+
+                        <div class="script-subtitle">Shared Budget</div>
+                        <p>Want to manage one budget with multiple family members?</p>
+                        <p>Go to Planner, open Share Budget, and tap Create Share Link for the budget you want to share.</p>
+                        <p>Approve the Google permissions, then copy and share the generated link.</p>
+                        <p>On the second user’s device, open Join Shared Budget, paste the link ID, and tap Join Budget.</p>
+                        <p>The shared budget is now downloaded and ready to use.</p>
+                        <p>To receive the latest updates from other users, tap Sync All Budgets.</p>
+                        <p>Sync is manual, so it updates only when you run it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    2. Expense Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Want to track your spending?</p>
+                        <p>Tap Planner, open Expenses, and go to Add.</p>
+                        <p>Tap Add Expense and select a budget first.</p>
+                        <p>If no budget is available, create one using New Budget.</p>
+                        <p>Now choose the date, category, subcategory, amount, and payment source.</p>
+                        <p>You can also add notes if needed.</p>
+                        <p>Tap Save, and the app shows your budget usage instantly.</p>
+                        <p>If you exceed the budget, you’ll get an alert.</p>
+                        <p>For loans and goals, you can also see EMI and savings progress.</p>
+                        <p>Open Search to view and filter all your expenses.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    3. Category Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Want to create your own category in Family Budget?</p>
+                        <p>Go to Planner and open Categories.</p>
+                        <p>In the Categories tab, type the category name and tap Add Category.</p>
+                        <p>To create a subcategory, open the Subcategories tab, select the main category, enter the subcategory name, and tap Add Subcategory.</p>
+                        <p>That’s it — your new category and subcategory are now ready to use in both Budget and Expense screens.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accounts Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    4. Accounts Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Want to track your bank account or credit card balance?</p>
+                        <p>Go to Wallet, open Accounts, and tap Add Account.</p>
+                        <p>Select the account type, enter the account name, and add the opening balance.</p>
+                        <p>Then tap Add Account to save it.</p>
+                        <p>To add money, tap Add Income, choose the date, enter the amount, select the account, and save it.</p>
+                        <p>When you add an expense, you can use any account as the payment source.</p>
+                        <p>The expense amount is automatically deducted from that account.</p>
+                        <p>You can also open the Search tab to filter transactions by account, income, expense, or date range.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    5. Goal Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Want to track your savings goal in Family Budget?</p>
+                        <p>Go to Wallet, open Goals, and tap Add Goal.</p>
+                        <p>Enter the goal name, choose the type, add the target amount, and select the target date.</p>
+                        <p>If you already saved some money, enter it in Already Saved.</p>
+                        <p>Tap Save, and the app calculates how much you need to save every month.</p>
+                        <p>You can then use the goal in Budget and Expense screens to track your progress.</p>
+                        <p>The app shows how much you’ve saved, how much is left, and alerts you if you fall behind.</p>
+                        <p>You can also open Search to view, edit, delete, or complete any goal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loan Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    6. Loan Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Want to manage your loans more clearly?</p>
+                        <p>Go to Wallet, open Loans, and tap Add Loan.</p>
+                        <p>Enter the loan name, provider, type, interest method, principal, interest rate, tenure, and start month.</p>
+                        <p>If you already paid a few EMIs, just enter the last paid month.</p>
+                        <p>The app instantly shows your monthly EMI, total interest, total payable, and loan end month.</p>
+                        <p>Tap Save, and the loan is ready to use in your budget.</p>
+                        <p>When you record loan expenses, you can track paid and pending EMIs.</p>
+                        <p>You can also open any loan to view full progress, outstanding balance, and the complete EMI schedule.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recap Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    7. Recap Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Want to see your spending habits more clearly?</p>
+                        <p>Open Recap and turn your expenses into visual insights.</p>
+                        <p>Part 1 shows detailed charts by user, category, subcategory, weekday, weekly view, and payment source.</p>
+                        <p>You can also filter the data by budget and date range.</p>
+                        <p>Part 2 lets you compare multiple budgets in one view.</p>
+                        <p>You can compare spending by total amount, category, subcategory, payment source, or user.</p>
+                        <p>For example, you can compare entertainment expenses across different months and understand the difference instantly.</p>
+                        <p>Recap helps you analyze spending smarter and make better decisions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ask AI Screen -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    8. Ask AI Screen
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="script-subtitle">Chat with AI</div>
+                        <p>Want personalized insights about your finances?</p>
+                        <p>Open the Ask AI screen to get smart, data-driven analysis of your spending habits.</p>
+                        <p>This screen is divided into two powerful tabs. In the first tab, you can chat directly with your financial assistant.</p>
+                        <p>Ask specific questions about your project, such as "Where do I spend most?" or "Are there any red flags in my expenses?"</p>
+                        <p>You can also ask, "Which category needs attention?" to instantly get tailored advice based on your recent activity.</p>
+                        
+                        <div class="script-subtitle">Generate Report/AI Insights</div>
+                        <p>Want a complete overview of your financial health?</p>
+                        <p>Switch to the second tab and tap Generate Report to get a deep dive into the last few months of your budget.</p>
+                        <p>The AI will compile a comprehensive document starting with an Executive Summary and a Financial Scorecard.</p>
+                        <p>It breaks down your money with a Budget-by-Budget Review, Spending Patterns, and Contributor Analysis.</p>
+                        <p>You will also see a Payment Source Analysis, your progress on Goals & Savings Targets, and a complete Debt Overview.</p>
+                        <p>Finally, the report highlights Red Flags, identifies Opportunities to Save, and gives you a clear Action Plan to improve your financial future.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript">
+        // Google Translate Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,ta,te,ml,kn,hi,de,fr,es,ja,pt,ko,zh-CN,it,id,ar',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+        
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.accordion-header');
+            
+            // Open the first one by default
+            if(accordions.length > 0) {
+                const firstContent = accordions[0].nextElementSibling;
+                accordions[0].parentElement.classList.add('active');
+                firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+            }
+
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const content = this.nextElementSibling;
+                    
+                    // Close all others
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        }
+                    });
+
+                    // Toggle current
+                    item.classList.toggle('active');
+                    if (item.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

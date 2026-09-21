@@ -1,0 +1,7 @@
+Downloaded from the app's Google Play listing: https://play.google.com/store/apps/details?id=com.mepandiyan.sharedaibudget
+
+icon.png  <- https://play-lh.googleusercontent.com/2i06O6Ob7MZ47QmYG7CcKrELylxr36ldNIzDQD7HB-FDeT3lAQhpoI8XDwBVjA44OsT7LujBuKW16DR3F8DlHQ=s512  (319764 bytes)
+screenshot-1.jpg  <- https://play-lh.googleusercontent.com/IXW63ilnsax-8sH6VVpGyaZx4gZ553PKr9hct-G7r3P3IgAX5yPojWYjegI3NojCNVDBwI9A5uIZIe4ljVlwi80=w960  (85704 bytes)
+screenshot-2.jpg  <- https://play-lh.googleusercontent.com/g4bzJUlJXo9KU6znSebA64JIOk6wJOezqmlXX-kywfdI8odoghgDN9Wk5bY66z0Csmg52LwS5D65Ubxkuuzy=w960  (55711 bytes)
+screenshot-3.jpg  <- https://play-lh.googleusercontent.com/1X4Q0AUe-6iobys8_gnUr3wMqIHQUeqODondj0-l5ZHam_q6PXlfERjj7xvS8BfQMwSG26WYx_SHAEbr-c3vXw=w960  (57427 bytes)
+screenshot-4.jpg  <- https://play-lh.googleusercontent.com/4XFbJA6GXnw27oyDekcN4r4AqJYNv33HlW3GOAjnakvMw9kf-2A1FpJTMxPeCxVQxEpo0_ODgwLu0ei4ukR-=w960  (47455 bytes)

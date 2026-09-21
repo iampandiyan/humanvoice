@@ -1,0 +1,8 @@
+Downloaded from the app's Google Play listing: https://play.google.com/store/apps/details?id=com.smartgate.anpr_gate_system
+
+icon.png  <- https://play-lh.googleusercontent.com/71gxDMgaS1uBTa21knOnukQ1VBkeV5ZWh9znHJzEPDWU0EjvN6ir_20X3uI2QFowXTqt7OeM76EBYPTD7qqlxQ=s512  (373023 bytes)
+screenshot-1.jpg  <- https://play-lh.googleusercontent.com/10nz4eQn-aiV4H4p7pQwOK-6ZgDh00EbiInXQnDe-EKmyxXpCGHOXosgScudsIZYFHwddbzqtQH-0CbzXW1gCA=w960  (77044 bytes)
+screenshot-2.jpg  <- https://play-lh.googleusercontent.com/Gqt5Mx-y91egJG3FojOpbXsJdz8NCi68Jj8OqTq37wE8KUicbOtK_oiVWqPjltNm-fh23vK24iF0wHaAhAfE=w960  (56067 bytes)
+screenshot-3.jpg  <- https://play-lh.googleusercontent.com/-K9Fr5j_QxBbjlXXiG3oHwnSgFHDTVreygVAC9zZoLcDCXYeGVoy8c--tKBsKQ59RAyxqZiuFr8XvssNADTM3Q=w960  (51139 bytes)
+
+Note: the original Play screenshot 3 (Confirm Plate: a legible number plate and a phone number) is not used on this site; it is kept, unpublished, in _originals/smart-gate/.

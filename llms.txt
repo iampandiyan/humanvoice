@@ -1,0 +1,30 @@
+# Humanvoice
+
+> Simple, privacy-friendly apps for families, parents, professionals and communities. Built by Karuppasamy Pandiyan Marimuthu. Each app has its own page, support page and privacy policy.
+
+## Apps
+- [Where is my people](https://humanvoice.in/where-is-my-people/): Where is my people is a family location-sharing app for iPhone and Android.
+- [SafePlay Video Player](https://humanvoice.in/safeplay-video-player/): SafePlay Video Player (called Kids Safe Video Player on Android) is a free, offline, parent-controlled video player for kids. (also known as Kids Safe Video Player)
+- [Shared AI Budget Tracker](https://humanvoice.in/shared-ai-budget-tracker/): Shared AI Budget Tracker is a personal and family finance app for iPhone and Android. (also known as Family Budget, BudgetTracker)
+- [One On One Tracker](https://humanvoice.in/one-on-one-tracker/): One On One Tracker is a meeting-history app for managers, mentors and professionals. (also known as OneOnOneTracker)
+- [ANPR Smart Gate Tracker](https://humanvoice.in/smart-gate/): ANPR Smart Gate Tracker is an Android app for apartment communities that scans vehicle number plates at the gate and logs entries, exits and visitors. (also known as Smart Gate, Smart Gate - ANPR Security)
+
+## Support and privacy
+- [Where is my people support](https://humanvoice.in/where-is-my-people/support.html)
+- [Where is my people privacy policy](https://humanvoice.in/where-is-my-people/privacy.html)
+- [About SafePlay Video Player](https://humanvoice.in/safeplay-video-player/about.html): A fully offline, parent-controlled video player for kids: Parent PIN, screen-time limits, no ads, no sign-up and no data sent to any server.
+- [SafePlay Video Player support](https://humanvoice.in/safeplay-video-player/support.html)
+- [SafePlay Video Player privacy policy](https://humanvoice.in/safeplay-video-player/privacy.html)
+- [About Shared AI Budget Tracker](https://humanvoice.in/shared-ai-budget-tracker/about.html): A private budget tracker with optional AI insights. Track expenses, budgets, goals and loans offline, and back up to your own Google Drive and Sheets.
+- [Shared AI Budget Tracker support](https://humanvoice.in/shared-ai-budget-tracker/support.html)
+- [Shared AI Budget Tracker privacy policy](https://humanvoice.in/shared-ai-budget-tracker/privacy.html)
+- [About One On One Tracker](https://humanvoice.in/one-on-one-tracker/about.html): Log 1-on-1 meetings, keep a profile for every contact and never miss a follow-up. Your notes stay on your device. Free, with a one-time Lifetime Pro.
+- [One On One Tracker support](https://humanvoice.in/one-on-one-tracker/support.html)
+- [One On One Tracker privacy policy](https://humanvoice.in/one-on-one-tracker/privacy.html)
+- [About ANPR Smart Gate Tracker](https://humanvoice.in/smart-gate/about.html): Scan number plates offline, log entries and exits, and manage residents with Admin, Operator and Viewer roles. A gate security app for apartments.
+- [ANPR Smart Gate Tracker support](https://humanvoice.in/smart-gate/support.html)
+- [ANPR Smart Gate Tracker privacy policy](https://humanvoice.in/smart-gate/privacy.html)
+- [Delete your Where is my people account](https://humanvoice.in/where-is-my-people/delete-account.html)
+
+## Contact
+- Email: mepandiyan@gmail.com (reply within 24-48 hours)

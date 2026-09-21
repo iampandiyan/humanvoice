@@ -1,0 +1,64 @@
+<h1>Privacy Policy for ANPR Smart Gate Tracker</h1>
+    <p class="last-updated">Last Updated: April 30, 2026</p>
+
+    <p>Smart Gate ("we," "our," or "the App") is a B2B vehicle entry and visitor management system designed for apartment communities. This Privacy Policy explains how we collect, use, and safeguard the information of community administrators, operators, and visitors when you use our mobile application.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>To provide secure gate management and Automatic Number Plate Recognition (ANPR), we collect the following types of data:</p>
+    <ul>
+        <li><strong>Camera & Image Data:</strong> When scanning a vehicle, the App uses your device's camera to capture an image of the vehicle's number plate. <strong>All OCR (Optical Character Recognition) processing happens locally on the device.</strong></li>
+        <li><strong>Visitor & Resident Data:</strong> Information entered manually or captured via scan, including vehicle numbers, owner names, flat/unit numbers, and visit purposes. This data is stored securely in the local SQLite database on the device.</li>
+        <li><strong>Authentication Data:</strong> We use Firebase Authentication (Google Sign-In) to securely authenticate administrators and operators. This collects basic profile information (Name, Email) to manage role-based access.</li>
+        <li><strong>Gate Logs & Audits:</strong> The App logs entry times, exit times, gate names, and the operator who processed the entry for security audit purposes.</li>
+    </ul>
+
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+        <li><strong>Vehicle Verification:</strong> To instantly match scanned number plates against the local database of registered residents and frequent visitors.</li>
+        <li><strong>Community Security:</strong> To maintain accurate, searchable entry and audit logs for the apartment association or property management.</li>
+        <li><strong>Cloud Backup:</strong> If configured by the community admin, the App securely backs up the local database to the admin's connected Google Drive account to prevent data loss.</li>
+        <li><strong>Role Management:</strong> To distinguish between Admin, Operator, and Viewer permissions within the same community license.</li>
+    </ul>
+
+    <h2>3. Third-Party Services & Data Sharing</h2>
+    <p>We do not sell, rent, or share your community's personal data or visitor logs with third-party advertisers or data brokers. Data is only processed through strictly necessary service providers:</p>
+    <ul>
+        <li><strong>Firebase Authentication:</strong> Used solely to verify user identities and manage secure logins.</li>
+        <li><strong>Google Drive API:</strong> Used exclusively to create and restore private backups of your local database. We do not access, read, or modify any other files in your Google account. Use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>.</li>
+        <li><strong>Apple App Store & Google Play:</strong> Subscription payments and community licenses are processed securely by Apple and Google. We do not collect or store your credit card or financial information.</li>
+    </ul>
+
+    <h2>4. Device Permissions</h2>
+    <p>To function correctly, the App requests the following device permissions. You may revoke these at any time via your device settings, though core functionality may be impacted:</p>
+    <ul>
+        <li><strong>Camera:</strong> Strictly required to scan vehicle number plates at the gate.</li>
+        <li><strong>Storage / Files:</strong> Required to save the local SQLite database, store captured vehicle images, and generate Excel/CSV export reports.</li>
+        <li><strong>Network / Internet:</strong> Required for initial Google Sign-In, license validation, and Google Drive database backups.</li>
+    </ul>
+
+    <h2>5. Data Storage and Security</h2>
+    <p><strong>Offline-First Architecture:</strong> Smart Gate is designed to operate primarily offline. Resident lists, vehicle data, and entry logs are stored securely on the local device hardware. We do not transmit or store your community's daily visitor logs on proprietary centralized cloud servers owned by us. All data transmitted for Google Drive backups or Firebase authentication is encrypted in transit using secure HTTPS/TLS protocols.</p>
+
+    <h2>6. Data Retention & User Rights (Deletion Policy)</h2>
+    <p>We provide complete control over your data in compliance with Google Play and Apple App Store requirements:</p>
+    <ul>
+        <li><strong>In-App Deletion:</strong> Community administrators can delete specific vehicle entries, resident profiles, or clear the entire entry log directly from the App's settings.</li>
+        <li><strong>Local Data Erasure:</strong> Because the primary database is stored locally, uninstalling the app will instantly permanently delete all local entry logs and vehicle images from that specific device.</li>
+        <li><strong>Backup Deletion:</strong> To delete your cloud backups, simply delete the backup file directly from your connected Google Drive account.</li>
+        <li><strong>Account Deletion Request:</strong> If you wish to permanently delete your Firebase authentication account and all associated licensing data from our systems, please use our secure request form:</li>
+    </ul>
+    
+    <div class="deletion-box">
+        <strong>Account & Data Deletion Request Form:</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfhRiaUgs0YymLp-hf8_ZudwGUpIfqwh0pNxIDbnwNCU3hv_Q/viewform?usp=header" target="_blank">Click here to request account deletion</a>
+    </div>
+
+    <p>Requests are processed within 7 business days.</p>
+
+    <h2>7. Children’s Privacy</h2>
+    <p>Smart Gate is a B2B security utility intended for use by adult security personnel and property managers. We do not knowingly collect personal information from children under the age of 13.</p>
+
+    <div class="contact-info">
+        <h2>8. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
+        <p><strong>Email:</strong> mepandiyan@gmail.com</p>
+    </div>
