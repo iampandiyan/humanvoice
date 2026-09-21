@@ -1,0 +1,12 @@
+# Your untouched originals (large files, and screenshots that show real names/codes). Never published.
+_originals/
+
+# Computer and editor clutter that should never be published
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+node_modules/
+*.log
+*.tmp
