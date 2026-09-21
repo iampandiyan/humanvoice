@@ -15,7 +15,8 @@ function walk(dir, out = []) {
     if ([".git", "content", "tools", "node_modules"].includes(e.name)) continue;
     const p = path.join(dir, e.name);
     if (e.isDirectory()) walk(p, out);
-    else if (e.name.endsWith(".html")) out.push(p);
+    // Search-engine ownership files (e.g. google1a2b3c.html) are one bare line, not pages: never check or list them.
+    else if (e.name.endsWith(".html") && !/^google[0-9a-f]+\.html$/.test(e.name)) out.push(p);
   }
   return out;
 }
