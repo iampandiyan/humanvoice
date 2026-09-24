@@ -67,7 +67,7 @@ const storeButtons = (p, depth) => {
 const linkButtons = (p, depth, { details = true } = {}) => {
   const b = up(depth) + p.slug + "/";
   const more = details
-    ? `<a class="btn btn--ghost btn--more" href="${b}${p.about ? "about.html" : "index.html"}" aria-label="More details about ${esc(p.name)}">More details &rarr;</a>`
+    ? `<a class="btn btn--ghost btn--more" href="${b}${p.about ? "about.html" : ""}" aria-label="More details about ${esc(p.name)}">More details &rarr;</a>`
     : "";
   return `<div class="btn-row btn-row--links${details ? " btn-row--three" : ""}">${more}<a class="btn btn--ghost" href="${b}support.html">Support</a><a class="btn btn--ghost" href="${b}privacy.html">Privacy policy</a></div>`;
 };
@@ -121,7 +121,7 @@ ${jsonLd.map(ld).join("\n")}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="wrap">
-<a class="brand" href="${u}index.html">${SITE.name}</a>
+<a class="brand" href="${u || "./"}">${SITE.name}</a>
 <nav class="nav" aria-label="Main"><a href="${u}#apps">Apps</a><a href="${u}#contact">Contact</a></nav>
 </div></header>
 <main id="main"${langs ? ` data-langs="${langs}"` : ""}>
@@ -140,7 +140,7 @@ ${langs ? `<script src="${u}assets/translate.js" defer></script>` : ""}
 function crumbs(depth, trail) {
   // trail: [[label, relHref|null], ...] after "Home"
   const u = up(depth);
-  const parts = [`<a href="${u}index.html">Home</a>`, ...trail.map(([l, h]) => (h ? `<a href="${h}">${esc(l)}</a>` : `<span aria-current="page">${esc(l)}</span>`))];
+  const parts = [`<a href="${u || "./"}">Home</a>`, ...trail.map(([l, h]) => (h ? `<a href="${h}">${esc(l)}</a>` : `<span aria-current="page">${esc(l)}</span>`))];
   return `<nav class="crumbs wrap" aria-label="Breadcrumb">${parts.join(" &rsaquo; ")}</nav>`;
 }
 const savePage = (rel, html, priority = "0.6") => {
@@ -161,7 +161,7 @@ function layer(p) {
 <div class="wrap">
 <div class="layer__body">
 <div class="layer__id">${icon ? img(icon, `${p.name} app icon`, { cls: "layer__icon", eager: false }) : ""}
-<div><h2 id="h-${p.slug}"><a href="${p.slug}/index.html">${esc(p.name)}</a>${badge}</h2><p class="layer__tag">${esc(p.tagline)}</p></div></div>
+<div><h2 id="h-${p.slug}"><a href="${p.slug}/">${esc(p.name)}</a>${badge}</h2><p class="layer__tag">${esc(p.tagline)}</p></div></div>
 <p>${esc(p.blurb)}</p>
 <ul class="points">${p.points.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
 ${storeButtons(p, 0)}
@@ -447,11 +447,11 @@ ${storeButtons(p, 1)}
 <div class="card faq">
 <h2 id="h-faq">Frequently asked questions</h2>
 ${faqHtml(p.faq)}
-<p>More: <a href="index.html">${esc(p.name)} overview</a> &middot; <a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy policy</a></p>
+<p>More: <a href="./">${esc(p.name)} overview</a> &middot; <a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy policy</a></p>
 </div>
 </section>`);
 
-  const body = `${crumbs(1, [[p.name, "index.html"], ["About", null]])}\n${sections.join("\n\n")}`;
+  const body = `${crumbs(1, [[p.name, "./"], ["About", null]])}\n${sections.join("\n\n")}`;
 
   const sameAs = [p.stores.apple, p.stores.play].filter(Boolean);
   const featureList = (a.features || []).map((f) => (f.title ? `${f.title}${f.soon ? " (coming soon)" : ""}: ${f.text}` : f.text));
@@ -506,7 +506,7 @@ ${faqHtml(p.faq)}
 function buildSupport(p) {
   const url = `${SITE.url}/${p.slug}/support.html`;
   const faq = [...(p.supportFaq || []), ...(p.faq || [])];
-  const body = `${crumbs(1, [[p.name, "index.html"], ["Support", null]])}
+  const body = `${crumbs(1, [[p.name, "./"], ["Support", null]])}
 <section class="wrap page stack">
 <div class="card">
 <h1>${esc(p.name)} Support</h1>
@@ -518,7 +518,7 @@ function buildSupport(p) {
 <div class="card faq">
 <h2>Common questions</h2>
 ${faq.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join("")}
-<p>See also: <a href="${p.about ? "about.html" : "index.html"}">About ${esc(p.name)}</a> &middot; <a href="privacy.html">Privacy policy</a>${p.hasDelete ? ` &middot; <a href="delete-account.html">Delete your account</a>` : ""}</p>
+<p>See also: <a href="${p.about ? "about.html" : "./"}">About ${esc(p.name)}</a> &middot; <a href="privacy.html">Privacy policy</a>${p.hasDelete ? ` &middot; <a href="delete-account.html">Delete your account</a>` : ""}</p>
 </div>
 </section>`;
   savePage(
@@ -542,7 +542,7 @@ function buildPrivacy(p) {
   const fragment = fs.readFileSync(path.join(ROOT, `content/${p.slug}/privacy.body.html`), "utf8").trim();
   const url = `${SITE.url}/${p.slug}/privacy.html`;
   const bar = p.privacyLangs ? `<div class="lang-bar"><div id="google_translate_element"></div></div>\n` : "";
-  const body = `${crumbs(1, [[p.name, "index.html"], ["Privacy policy", null]])}
+  const body = `${crumbs(1, [[p.name, "./"], ["Privacy policy", null]])}
 <div class="wrap"><article class="policy">
 ${bar}${fragment}
 </article></div>`;
@@ -570,7 +570,7 @@ ${bar}${fragment}
 function buildTerms(p) {
   const fragment = fs.readFileSync(path.join(ROOT, `content/${p.slug}/terms.body.html`), "utf8").trim();
   const url = `${SITE.url}/${p.slug}/terms.html`;
-  const body = `${crumbs(1, [[p.name, "index.html"], ["Terms of service", null]])}
+  const body = `${crumbs(1, [[p.name, "./"], ["Terms of service", null]])}
 <div class="wrap"><article class="policy">
 ${fragment}
 </article></div>`;
@@ -604,7 +604,7 @@ function buildDelete(p) {
     ["How long does it take?", "Deleting inside the app is immediate. Requests made by email or form are processed within 7 business days."],
     ["Can I get a copy of my data first?", "Yes. In the app go to Settings, then Export my data, before you delete your account."],
   ];
-  const body = `${crumbs(1, [[p.name, "index.html"], ["Delete your account", null]])}
+  const body = `${crumbs(1, [[p.name, "./"], ["Delete your account", null]])}
 <section class="wrap page stack">
 <div class="card">
 <h1>Delete your ${esc(p.name)} account</h1>
