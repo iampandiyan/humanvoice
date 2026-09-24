@@ -490,6 +490,7 @@ export const PRODUCTS = [
       play: "https://play.google.com/store/apps/details?id=com.smartgate.anpr_gate_system",
     },
     androidOnly: true,
+    hasTerms: true,
     hasPrivacy: true,
     privacyLangs: "en,ta,te,ml,kn,hi,mr,gu,bn,pa,ur",
     privacyTitle: "Privacy Policy for ANPR Smart Gate Tracker",
