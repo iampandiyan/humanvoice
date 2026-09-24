@@ -398,6 +398,7 @@ export const PRODUCTS = [
       apple: "https://apps.apple.com/us/app/one-on-one-tracker/id6760655255",
       play: "https://play.google.com/store/apps/details?id=com.mepandiyan.one_on_one_tracker",
     },
+    hasTerms: true,
     hasPrivacy: true,
     privacyLangs: "", // the original policy has no language picker
     privacyTitle: "Privacy Policy for OneOnOneTracker",

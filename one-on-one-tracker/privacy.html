@@ -38,14 +38,14 @@
 <nav class="crumbs wrap" aria-label="Breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">One On One Tracker</a> &rsaquo; <span aria-current="page">Privacy policy</span></nav>
 <div class="wrap"><article class="policy">
 <h1>Privacy Policy for OneOnOneTracker</h1>
-    <p class="last-updated">Last Updated: March 17, 2026</p>
+    <p class="last-updated">Last Updated: September 24, 2026</p>
 
     <p>OneOnOneTracker ("we," "our," or "the App") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
 
     <h2>1. Information We Collect</h2>
     <p>To provide the features of OneOnOneTracker, we collect the following types of data:</p>
     <ul>
-        <li><strong>Personal Identification Information:</strong> Via Google Sign-In or Apple Sign-In, we access your name, email address, and a unique User ID to identify your profile.</li>
+        <li><strong>Personal Identification Information:</strong> Via Google Sign-In or Apple Sign-In, we access your name, email address, and a unique User ID to sign you in and identify your profile (Google Sign-In is handled by Firebase Authentication). We do not sell this information or use it for advertising.</li>
         <li><strong>Meeting Data:</strong> Information you manually enter (names, notes, and follow-ups).</li>
         <li><strong>App Activity & Performance:</strong> We collect crash logs and app interaction data to monitor stability and improve functionality.</li>
         <li><strong>Device Identifiers:</strong> We may collect device IDs for fraud prevention and to manage your "Pro" purchase status.</li>
@@ -58,13 +58,19 @@
         <li><strong>Analytics:</strong> To diagnose bugs and improve app performance via crash reporting.</li>
     </ul>
 
-    <h2>3. Google Drive & API Disclosure</h2>
-    <p>The App requests access to the <code>drive.appdata</code> scope to create a private backup file. We do not access any other files in your Google Drive. Use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>.</p>
+    <h2>3. Google User Data, Drive & API Disclosure</h2>
+    <p>Signing in with Google and Drive backup are optional. If you use them, the App requests:</p>
+    <ul>
+        <li><strong>Google Drive App Data (<code>https://www.googleapis.com/auth/drive.appdata</code>):</strong> Used to create a private backup file of your meeting data in the App's hidden application data folder in your Google Drive, to find that backup, and to download it back to your device when you choose to restore. This folder is separate from your regular Drive files and is not visible in Drive. The App cannot access any other file in your Drive.</li>
+        <li><strong>Basic profile (email and name):</strong> Used to sign you in and show which account is connected.</li>
+    </ul>
+    <p><strong>How Google user data is handled:</strong> Backup data goes directly between your device and Google. It is not sent to our servers and we cannot see it. It is never shared with third parties, never used for advertising, never sold, and never used to train AI or machine-learning models. No person at Humanvoice reads it. You can disconnect the App at any time on your <a href="https://myaccount.google.com/permissions" target="_blank">Google Account permissions</a> page; removing the App's data can be done from the Drive settings "Manage apps" page.</p>
+    <p>The App's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
 
     <h2>4. Data Storage and Security</h2>
     <ul>
         <li><strong>Encryption:</strong> All data is encrypted in transit using HTTPS/TLS protocols.</li>
-        <li><strong>Third-Party Sharing:</strong> We do not share your personal data with third-party advertisers. Data is only shared with service providers (like Firebase/Google) necessary to run the app.</li>
+        <li><strong>Third-Party Sharing:</strong> We do not share your personal data with third-party advertisers. Data is only shared with service providers (Firebase Authentication and crash reporting, and Google) necessary to run the app.</li>
     </ul>
 
     <h2>5. In-App Purchases</h2>
