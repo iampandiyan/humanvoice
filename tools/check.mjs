@@ -23,6 +23,7 @@ function walk(dir, out = []) {
 
 const files = walk(ROOT);
 const titles = new Map();
+const descs = new Map();
 const canonicals = new Set();
 const sitemap = fs.existsSync(path.join(ROOT, "sitemap.xml")) ? fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8") : "";
 if (!sitemap) err("sitemap.xml", "missing (run node tools/build.mjs)");
@@ -43,7 +44,12 @@ for (const file of files) {
   if (!is404) {
     const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1];
     if (!desc) err(rel, "no meta description");
-    else if (desc.length > 165) warn(rel, `description is ${desc.length} chars`);
+    else {
+      if (desc.length > 165) warn(rel, `description is ${desc.length} chars`);
+      if (desc.length < 70) warn(rel, `description is only ${desc.length} chars`);
+      if (descs.has(desc)) err(rel, `duplicate description with ${descs.get(desc)}`);
+      descs.set(desc, rel);
+    }
     const canonical = (html.match(/<link rel="canonical" href="([^"]*)"/) || [])[1];
     if (!canonical) err(rel, "no canonical link");
     else {

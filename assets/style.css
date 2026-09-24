@@ -256,3 +256,6 @@ body { top: 0 !important; }
 @media (min-width: 900px) {
   .layer .btn-row--three { max-width: 34rem; }
 }
+
+.meta { font-size: 0.9rem; color: var(--muted); }
+.card ol, .card ul { padding-left: 1.25rem; }

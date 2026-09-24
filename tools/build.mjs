@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { SITE, PRODUCTS } from "./products.mjs";
+import { GUIDES } from "./guides.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -129,6 +130,7 @@ ${body}
 </main>
 <footer class="site-footer"><div class="wrap">
 <div><strong>${SITE.name}</strong> &middot; ${esc(SITE.tagline)}<br>&copy; ${SITE.year} ${esc(SITE.owner)}</div>
+<nav aria-label="Guides"><a href="${u}guides/">Guides</a></nav>
 <nav aria-label="Privacy policies"><span>Privacy:</span>${PRODUCTS.map((p) => `<a href="${u}${p.slug}/privacy.html">${esc(p.name)}</a>`).join("")}</nav>
 </div></footer>
 ${langs ? `<script src="${u}assets/translate.js" defer></script>` : ""}
@@ -177,7 +179,7 @@ function buildHome() {
 <p class="eyebrow">${SITE.name}</p>
 <h1>Simple, privacy-friendly apps</h1>
 <p>${esc(SITE.tagline)} Built by ${esc(SITE.owner)}.</p>
-<p><a class="btn" href="#apps">See the apps</a></p>
+<p><a class="btn" href="#apps">See the apps</a> <a class="btn btn--ghost" href="guides/">Read the guides</a></p>
 </section>
 <div id="apps">
 ${PRODUCTS.map(layer).join("\n")}
@@ -254,6 +256,7 @@ ${tutorialHtml}
 <section class="wrap page" aria-labelledby="h-faq"><div class="card">
 <h2 id="h-faq">Frequently asked questions</h2>
 ${faqHtml(p.faq)}
+${guidesFor(p.slug).length ? `<p>Guides: ${guidesFor(p.slug).map((g) => `<a href="../guides/${g.slug}.html">${esc(g.h1)}</a>`).join(" &middot; ")}</p>` : ""}
 <p>More help: <a href="support.html">${esc(p.name)} support</a> &middot; <a href="privacy.html">Privacy policy</a>${p.hasTerms ? ` &middot; <a href="terms.html">Terms of service</a>` : ""}${p.hasDelete ? ` &middot; <a href="delete-account.html">Delete your account</a>` : ""}</p>
 </div></section>`;
 
@@ -641,6 +644,55 @@ ${faq.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join("")}
   );
 }
 
+/* ---------- guides (how-to articles from tools/guides.mjs) and the /guides/ hub ---------- */
+const guidesFor = (slug) => GUIDES.filter((g) => g.app === slug);
+const productBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
+
+function buildGuide(g) {
+  const p = productBySlug(g.app);
+  const url = `${SITE.url}/guides/${g.slug}.html`;
+  const related = GUIDES.filter((x) => x.slug !== g.slug).slice(0, 3);
+  const body = `${crumbs(1, [["Guides", "./"], [g.h1, null]])}
+<article class="wrap page"><div class="card stack">
+<h1>${esc(g.h1)}</h1>
+<p class="lead">${esc(g.answer)}</p>
+<p class="meta">By ${esc(SITE.owner)} &middot; Last updated ${g.updated}</p>
+${g.steps ? `<h2>${esc(g.steps.name)}</h2><ol>${g.steps.items.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>` : ""}
+${g.sections.map((s) => `<h2>${esc(s.h)}</h2>
+${s.html}`).join("")}
+<h2>Frequently asked questions</h2>
+<div class="faq">${g.faq.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join("")}</div>
+${storeButtons(p, 1)}
+<p>More: <a href="../${p.slug}/">${esc(p.name)}</a> &middot; <a href="../${p.slug}/support.html">Support</a> &middot; <a href="../${p.slug}/privacy.html">Privacy policy</a></p>
+<h2>Related guides</h2>
+<ul>${related.map((r) => `<li><a href="${r.slug}.html">${esc(r.h1)}</a></li>`).join("")}</ul>
+</div></article>`;
+  const jsonLd = [
+    { "@context": "https://schema.org", "@type": "Article", headline: g.h1, description: g.description, url, mainEntityOfPage: url, inLanguage: "en", datePublished: g.updated, dateModified: g.updated, author: { "@type": "Person", name: SITE.owner }, publisher: publisherLd, image: `${SITE.url}/${p.img.og}`, about: { "@type": "MobileApplication", name: p.name, url: `${SITE.url}/${p.slug}/` } },
+    ...(g.steps ? [{ "@context": "https://schema.org", "@type": "HowTo", name: g.steps.name, step: g.steps.items.map((t, i) => ({ "@type": "HowToStep", position: i + 1, text: t })) }] : []),
+    faqLd(g.faq),
+    breadcrumbLd([["Home", `${SITE.url}/`], ["Guides", `${SITE.url}/guides/`], [g.h1, url]]),
+  ];
+  savePage(`guides/${g.slug}.html`, shell({ depth: 1, title: `${g.seoTitle} | ${SITE.name}`, description: g.description, canonicalPath: `guides/${g.slug}.html`, ogImage: p.img.og, ogAlt: `${p.name} guide`, ogType: "article", body, jsonLd }), "0.7");
+}
+
+function buildGuidesHub() {
+  const url = `${SITE.url}/guides/`;
+  const groups = PRODUCTS.map((p) => [p, guidesFor(p.slug)]).filter(([, gs]) => gs.length);
+  const body = `${crumbs(1, [["Guides", null]])}
+<section class="wrap page"><div class="card stack">
+<h1>Guides</h1>
+<p class="lead">Practical, plain-language answers on family budgeting, meetings, kids' screen time, gate security and family location privacy, with the apps that help.</p>
+${groups.map(([p, gs]) => `<h2>${esc(p.name)}</h2><ul>${gs.map((g) => `<li><a href="${g.slug}.html">${esc(g.h1)}</a><br><span class="meta">${esc(g.description)}</span></li>`).join("")}</ul>`).join("")}
+</div></section>`;
+  const jsonLd = [
+    { "@context": "https://schema.org", "@type": "CollectionPage", name: "Humanvoice guides", url, isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url } },
+    { "@context": "https://schema.org", "@type": "ItemList", itemListElement: GUIDES.map((g, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE.url}/guides/${g.slug}.html`, name: g.h1 })) },
+    breadcrumbLd([["Home", `${SITE.url}/`], ["Guides", url]]),
+  ];
+  savePage("guides/index.html", shell({ depth: 1, title: `Guides: budgeting, meetings, kids and family safety | ${SITE.name}`, description: "Plain-language guides on family budgeting, 1-on-1 meetings, kids' screen time, apartment gate logging and family location privacy.", canonicalPath: "guides/", body, jsonLd }), "0.8");
+}
+
 /* ---------- tutorial (copied as is, with canonical URL added) ---------- */
 function buildTutorial(p) {
   let html = fs.readFileSync(path.join(ROOT, `content/${p.slug}/tutorial.source.html`), "utf8");
@@ -688,6 +740,10 @@ function buildFiles() {
     "## Apps",
     ...PRODUCTS.map((p) => `- [${p.name}](${SITE.url}/${p.slug}/): ${firstSentence(p.definition)}${p.altNames.length ? ` (also known as ${p.altNames.join(", ")})` : ""}`),
     "",
+    "## Guides",
+    `- [All guides](${SITE.url}/guides/)`,
+    ...GUIDES.map((g) => `- [${g.h1}](${SITE.url}/guides/${g.slug}.html): ${g.answer}`),
+    "",
     "## Support and privacy",
     ...PRODUCTS.flatMap((p) => [
       ...(p.about ? [`- [About ${p.name}](${SITE.url}/${p.slug}/about.html): ${p.about.seoDescription}`] : []),
@@ -724,6 +780,8 @@ for (const p of PRODUCTS) {
   if (p.hasDelete) buildDelete(p);
   if (p.hasTutorial) buildTutorial(p);
 }
+buildGuidesHub();
+for (const g of GUIDES) buildGuide(g);
 build404();
 buildFiles();
 console.log(`Built ${pages.length} pages + sitemap.xml, robots.txt, llms.txt, site.webmanifest, 404.html`);

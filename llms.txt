@@ -9,6 +9,14 @@
 - [One On One Tracker](https://humanvoice.in/one-on-one-tracker/): One On One Tracker is a meeting-history app for managers, mentors and professionals. (also known as OneOnOneTracker)
 - [ANPR Smart Gate Tracker](https://humanvoice.in/smart-gate/): ANPR Smart Gate Tracker is an Android app for apartment communities that scans vehicle number plates at the gate and logs entries, exits and visitors. (also known as Smart Gate, Smart Gate - ANPR Security)
 
+## Guides
+- [All guides](https://humanvoice.in/guides/)
+- [How to build a family budget you can stick to](https://humanvoice.in/guides/family-budget-guide.html): A family budget works when it is simple: add up your monthly income, cover essentials first, give every other category a limit, record each expense as it happens, and review the numbers once a month.
+- [How to run and document a 1-on-1 meeting](https://humanvoice.in/guides/one-on-one-meeting-notes.html): A good 1-on-1 has a light agenda, mostly listening, and written notes that end with clear action items, each with an owner and a date. Open the next meeting by reviewing those items.
+- [How to set screen-time limits for your child's videos](https://humanvoice.in/guides/kids-video-screen-time-limits.html): Decide a daily limit that suits your child's age, choose the videos in advance, and use an app that enforces the limit and locks settings behind a parent PIN, so the rules do not depend on nagging.
+- [How apartment gate vehicle logging works](https://humanvoice.in/guides/apartment-gate-vehicle-logging.html): Register resident vehicles once, then have the guard scan each number plate at the gate. Known vehicles match instantly, unknown ones are logged as visitors, and every entry and exit is recorded with the operator's name.
+- [Family location sharing: a privacy checklist](https://humanvoice.in/guides/family-location-sharing-privacy.html): Before using any family location app, check who can see your location, what the company stores, whether it shows ads or sells data, and whether you can delete your account and data yourself.
+
 ## Support and privacy
 - [Where is my people support](https://humanvoice.in/where-is-my-people/support.html)
 - [Where is my people privacy policy](https://humanvoice.in/where-is-my-people/privacy.html)
