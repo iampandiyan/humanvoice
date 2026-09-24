@@ -220,6 +220,7 @@ export const PRODUCTS = [
       apple: "https://apps.apple.com/us/app/shared-ai-budget-tracker/id6765643311",
       play: "https://play.google.com/store/apps/details?id=com.mepandiyan.sharedaibudget",
     },
+    hasTerms: true,
     hasPrivacy: true,
     privacyLangs: ALL_LANGS,
     privacyTitle: "Privacy Policy for Shared AI Budget Tracker | Family Budget",

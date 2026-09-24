@@ -254,7 +254,7 @@ ${tutorialHtml}
 <section class="wrap page" aria-labelledby="h-faq"><div class="card">
 <h2 id="h-faq">Frequently asked questions</h2>
 ${faqHtml(p.faq)}
-<p>More help: <a href="support.html">${esc(p.name)} support</a> &middot; <a href="privacy.html">Privacy policy</a>${p.hasDelete ? ` &middot; <a href="delete-account.html">Delete your account</a>` : ""}</p>
+<p>More help: <a href="support.html">${esc(p.name)} support</a> &middot; <a href="privacy.html">Privacy policy</a>${p.hasTerms ? ` &middot; <a href="terms.html">Terms of service</a>` : ""}${p.hasDelete ? ` &middot; <a href="delete-account.html">Delete your account</a>` : ""}</p>
 </div></section>`;
 
   const sameAs = [p.stores.apple, p.stores.play].filter(Boolean);
@@ -566,6 +566,33 @@ ${bar}${fragment}
   );
 }
 
+/* ---------- terms of service (text is in content/<slug>/terms.body.html) ---------- */
+function buildTerms(p) {
+  const fragment = fs.readFileSync(path.join(ROOT, `content/${p.slug}/terms.body.html`), "utf8").trim();
+  const url = `${SITE.url}/${p.slug}/terms.html`;
+  const body = `${crumbs(1, [[p.name, "index.html"], ["Terms of service", null]])}
+<div class="wrap"><article class="policy">
+${fragment}
+</article></div>`;
+  savePage(
+    `${p.slug}/terms.html`,
+    shell({
+      depth: 1,
+      title: `Terms of Service: ${p.name} | ${SITE.name}`,
+      description: `Terms of service for ${p.name}: how the app may be used, your data, purchases and limits of liability.`,
+      canonicalPath: `${p.slug}/terms.html`,
+      ogImage: p.img.og,
+      ogAlt: `${p.name} terms of service`,
+      body,
+      jsonLd: [
+        { "@context": "https://schema.org", "@type": "WebPage", name: `Terms of Service: ${p.name}`, url, isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url }, about: { "@type": "MobileApplication", name: p.name } },
+        breadcrumbLd([["Home", `${SITE.url}/`], [p.name, `${SITE.url}/${p.slug}/`], ["Terms of service", url]]),
+      ],
+    }),
+    "0.3"
+  );
+}
+
 /* ---------- account deletion page (Where is my people) ---------- */
 function buildDelete(p) {
   const url = `${SITE.url}/${p.slug}/delete-account.html`;
@@ -693,6 +720,7 @@ for (const p of PRODUCTS) {
   buildSupport(p);
   if (p.about) buildAbout(p);
   if (p.hasPrivacy) buildPrivacy(p);
+  if (p.hasTerms) buildTerms(p);
   if (p.hasDelete) buildDelete(p);
   if (p.hasTutorial) buildTutorial(p);
 }
