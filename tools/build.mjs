@@ -603,7 +603,7 @@ function buildDelete(p) {
     ? `<p><a class="btn" href="${esc(p.deleteFormUrl)}" rel="noopener">Request account deletion (form)</a></p>`
     : "";
   const faq = [
-    ["What is deleted?", "Your profile, your latest location, the places you created and your family memberships are removed from our database. If you created a family circle, the circle and its places are removed with your account, so its members lose access to it."],
+    ["What is deleted?", "Your profile, your latest location and location history, the places you created, your family memberships, your account activity log and the list of your phones are removed from our database. If you created a family circle and other members are still in it, ownership passes to another member; if you were the only member, the circle and its places are removed."],
     ["How long does it take?", "Deleting inside the app is immediate. Requests made by email or form are processed within 7 business days."],
     ["Can I get a copy of my data first?", "Yes. In the app go to Settings, then Export my data, before you delete your account."],
   ];

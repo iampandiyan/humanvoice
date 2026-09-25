@@ -48,7 +48,7 @@ export const PRODUCTS = [
     hasPrivacy: true,
     privacyLangs: ALL_LANGS,
     hasDelete: true,
-    deleteFormUrl: "", // paste the Google Form link here when it exists; the delete page then shows a request button
+    deleteFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfK67Y8rMHiaNhyZReLQcsKdPZIbsKaogZmyMwqeYPvBZDrMQ/viewform", // Google Form; the delete page shows it as a request button
     supportIntro:
       "If you are experiencing any issues with the app, or want to suggest a new feature, please reach out!",
     faq: [
