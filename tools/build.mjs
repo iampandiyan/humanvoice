@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { SITE, PRODUCTS } from "./products.mjs";
 import { GUIDES } from "./guides.mjs";
+import { VERIFIED_TEXT } from "./verified-i18n.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -86,7 +87,7 @@ const faqLd = (faq) => ({
 const publisherLd = { "@type": "Organization", name: SITE.name, url: SITE.url };
 
 /* ---------- page shell ---------- */
-function shell({ depth, title, description, canonicalPath, ogImage, ogAlt, ogType = "website", body, jsonLd = [], langs = "" }) {
+function shell({ depth, title, description, canonicalPath, ogImage, ogAlt, ogType = "website", body, jsonLd = [], langs = "", robots = "index, follow, max-image-preview:large", extraHead = "" }) {
   const u = up(depth);
   const canonical = `${SITE.url}/${canonicalPath}`;
   const image = ogImage ? `${SITE.url}/${ogImage}` : `${SITE.url}/assets/og/home.png`;
@@ -98,7 +99,7 @@ function shell({ depth, title, description, canonicalPath, ogImage, ogAlt, ogTyp
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="${robots}">${extraHead ? "\n" + extraHead : ""}
 <meta name="theme-color" content="#f3f8fd">
 <meta name="author" content="${esc(SITE.owner)}">
 <meta property="og:site_name" content="${SITE.name}">
@@ -145,8 +146,9 @@ function crumbs(depth, trail) {
   const parts = [`<a href="${u || "./"}">Home</a>`, ...trail.map(([l, h]) => (h ? `<a href="${h}">${esc(l)}</a>` : `<span aria-current="page">${esc(l)}</span>`))];
   return `<nav class="crumbs wrap" aria-label="Breadcrumb">${parts.join(" &rsaquo; ")}</nav>`;
 }
-const savePage = (rel, html, priority = "0.6") => {
+const savePage = (rel, html, priority = "0.6", { sitemap = true } = {}) => {
   write(rel, html);
+  if (!sitemap) return; // utility pages that must not be listed (noindex)
   const loc = rel === "index.html" ? SITE.url + "/" : `${SITE.url}/${rel.replace(/index\.html$/, "")}`;
   pages.push({ loc, priority });
 };
@@ -603,7 +605,7 @@ function buildDelete(p) {
     ? `<p><a class="btn" href="${esc(p.deleteFormUrl)}" rel="noopener">Request account deletion (form)</a></p>`
     : "";
   const faq = [
-    ["What is deleted?", "Your profile, your latest location and location history, the places you created, your family memberships, your account activity log and the list of your phones are removed from our database. If you created a family circle and other members are still in it, ownership passes to another member; if you were the only member, the circle and its places are removed."],
+    ["What is deleted?", "Your profile, your latest location and location history, the places you created, your family memberships, your account activity log and the list of your phones are removed from our database. If you created a family and other members are still in it, ownership passes to another member; if you were the only member, the family and its places are removed."],
     ["How long does it take?", "Deleting inside the app is immediate. Requests made by email or form are processed within 7 business days."],
     ["Can I get a copy of my data first?", "Yes. In the app go to Settings, then Export my data, before you delete your account."],
   ];
@@ -650,11 +652,11 @@ ${faq.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join("")}
 // to join. The code is read in the browser only, never sent anywhere.
 function buildJoin(p) {
   const url = `${SITE.url}/${p.slug}/join.html`;
-  const body = `${crumbs(1, [[p.name, "./"], ["Join a circle", null]])}
+  const body = `${crumbs(1, [[p.name, "./"], ["Join a family", null]])}
 <section class="wrap page stack">
 <div class="card">
-<h1>Join a circle on ${esc(p.name)}</h1>
-<p class="lead" id="join-lead">Someone invited you to their family circle. Follow the three steps below.</p>
+<h1>Join a family on ${esc(p.name)}</h1>
+<p class="lead" id="join-lead">Someone invited you to their family. Follow the three steps below.</p>
 <div id="join-code-box" hidden>
 <p>Your invite code</p>
 <p><strong id="join-code" style="font-size:1.8rem;letter-spacing:0.08em;word-break:break-all"></strong></p>
@@ -663,9 +665,9 @@ function buildJoin(p) {
 <ol>
 <li><strong>Get the app.</strong> ${p.stores && p.stores.play ? `<a href="${esc(p.stores.play)}" rel="noopener">Open it on Google Play</a>.` : "The app is being tested and is not on the store yet. If you were invited to the test, use the link from your invitation."}</li>
 <li><strong>Create your account</strong> with your email and a password, and confirm your email.</li>
-<li><strong>Tap "I have an invite code"</strong> and enter the code above. You will be asked to confirm, and then the circle's owner has to approve your request before you can see anyone.</li>
+<li><strong>Tap "I have an invite code"</strong> and enter the code above. You will be asked to confirm, and then the family's owner has to approve your request before you can see anyone.</li>
 </ol>
-<p>Only the members of a circle can see each other's location, and only after the owner has approved each person. You can leave a circle at any time.</p>
+<p>Only the members of a family can see each other's location, and only after the owner has approved each person. You can leave a family at any time.</p>
 <p>See also: <a href="privacy.html">Privacy policy</a> &middot; <a href="support.html">Support</a></p>
 </div>
 </section>
@@ -677,7 +679,7 @@ function buildJoin(p) {
     if (!code) return;
     document.getElementById("join-code").textContent = code;
     document.getElementById("join-code-box").hidden = false;
-    document.getElementById("join-lead").textContent = "You have been invited to a family circle.";
+    document.getElementById("join-lead").textContent = "You have been invited to a family.";
     document.getElementById("join-copy").addEventListener("click", function () {
       var done = function () { document.getElementById("join-copied").textContent = "Copied"; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, done);
@@ -690,15 +692,73 @@ function buildJoin(p) {
     `${p.slug}/join.html`,
     shell({
       depth: 1,
-      title: `Join a circle | ${p.name}`,
-      description: `How to join a family circle on ${p.name}: get the app, create your account, and enter the invite code you were sent.`,
+      title: `Join a family | ${p.name}`,
+      description: `How to join a family on ${p.name}: get the app, create your account, and enter the invite code you were sent.`,
       canonicalPath: `${p.slug}/join.html`,
       ogImage: p.img.og,
-      ogAlt: `Join a circle on ${p.name}`,
+      ogAlt: `Join a family on ${p.name}`,
       body,
-      jsonLd: [breadcrumbLd([["Home", `${SITE.url}/`], [p.name, `${SITE.url}/${p.slug}/`], ["Join a circle", url]])],
+      jsonLd: [breadcrumbLd([["Home", `${SITE.url}/`], [p.name, `${SITE.url}/${p.slug}/`], ["Join a family", url]])],
     }),
     "0.3"
+  );
+}
+
+/* ---------- email confirmation page (Where is my people) ---------- */
+// The "Confirm signup" email link goes through Supabase, which confirms the address and then redirects
+// here (https://humanvoice.in/<slug>/verified.html?code=... , or #error=... if the link is dead). The page
+// works on any device and is not an app link, so it always shows in the browser. Only the browser reads
+// the address: nothing is sent anywhere, the code is removed from the address bar, and the page is
+// noindex, not in the sitemap and sends no referrer.
+function buildVerified(p) {
+  const en = VERIFIED_TEXT.en;
+  const dict = JSON.stringify(VERIFIED_TEXT).replace(/</g, "\\u003c");
+  const store = p.stores && p.stores.play ? `<p><a href="${esc(p.stores.play)}" rel="noopener">Google Play</a></p>` : "";
+  const body = `<section class="wrap page stack">
+<div class="card" id="verified-card">
+<h1 id="v-title">${esc(en.neutralTitle)}</h1>
+<p class="lead" id="v-text">${esc(en.neutralText)}</p>
+${store}<p><a href="support.html">Support</a></p>
+</div>
+</section>
+<script>
+(function () {
+  try {
+    var T = ${dict};
+    var q = new URLSearchParams(location.search);
+    var h = new URLSearchParams(location.hash.replace(/^#/, ""));
+    var lang = "en", want = [q.get("lang")].concat(navigator.languages || [navigator.language]);
+    for (var i = 0; i < want.length; i++) {
+      var b = String(want[i] || "").toLowerCase().split("-")[0];
+      if (b && Object.prototype.hasOwnProperty.call(T, b)) { lang = b; break; }
+    }
+    var failed = ["error", "error_code", "error_description"].some(function (k) { return q.has(k) || h.has(k); });
+    var state = failed ? "err" : q.has("code") ? "ok" : "neutral";
+    var tx = T[lang];
+    document.getElementById("v-title").textContent = tx[state + "Title"];
+    document.getElementById("v-text").textContent = tx[state + "Text"];
+    var card = document.getElementById("verified-card");
+    card.setAttribute("lang", lang);
+    if (lang === "ar") card.setAttribute("dir", "rtl");
+    history.replaceState(null, "", location.pathname);
+  } catch (e) {}
+})();
+</script>`;
+  savePage(
+    `${p.slug}/verified.html`,
+    shell({
+      depth: 1,
+      title: `Email confirmation | ${p.name}`,
+      description: `Confirmation page for your ${p.name} account email. Go back to the app and sign in with your email and password.`,
+      canonicalPath: `${p.slug}/verified.html`,
+      ogImage: p.img.og,
+      ogAlt: `Email confirmation for ${p.name}`,
+      robots: "noindex, nofollow",
+      extraHead: '<meta name="referrer" content="no-referrer">',
+      body,
+    }),
+    "0.1",
+    { sitemap: false }
   );
 }
 
@@ -843,6 +903,7 @@ for (const p of PRODUCTS) {
   if (p.hasTerms) buildTerms(p);
   if (p.hasDelete) buildDelete(p);
   if (p.hasJoin) buildJoin(p);
+  if (p.hasVerified) buildVerified(p);
   if (p.hasTutorial) buildTutorial(p);
 }
 buildGuidesHub();

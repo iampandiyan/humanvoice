@@ -174,15 +174,15 @@ export const GUIDES = [
     sections: [
       {
         h: "What we are building",
-        html: "<p><a href=\"../where-is-my-people/\">Where is my people</a> is a family location-sharing app for iPhone and Android that is coming soon. Family members see each other on a live map with battery level and place badges such as Home, Work and School. Location is shared only inside your family circle, and there are no ads and no data sales. You can export your data or delete your account inside the app. Read the <a href=\"../where-is-my-people/privacy.html\">privacy policy</a> for the full details.</p>",
+        html: "<p><a href=\"../where-is-my-people/\">Where is my people</a> is a family location-sharing app for iPhone and Android that is coming soon. Family members see each other on a live map with battery level and place badges such as Home, Work and School. Location is shared only inside your family, and there are no ads and no data sales. You can export your data or delete your account inside the app. Read the <a href=\"../where-is-my-people/privacy.html\">privacy policy</a> for the full details.</p>",
       },
       {
         h: "Talk to your family first",
-        html: "<p>Location sharing works best when everyone agrees. Explain why you are sharing it, decide together who is in the circle, and respect requests to leave.</p>",
+        html: "<p>Location sharing works best when everyone agrees. Explain why you are sharing it, decide together who is in the family, and respect requests to leave.</p>",
       },
     ],
     faq: [
-      ["Who can see my location in Where is my people?", "Only the active members of your own family circle. Nobody else can see it, and we do not show ads or sell data."],
+      ["Who can see my location in Where is my people?", "Only the active members of your own family. Nobody else can see it, and we do not show ads or sell data."],
       ["Can I delete my account and data?", "Yes. Open the app, go to Settings and choose Delete account. You can also use the account deletion page on this site."],
       ["Is the app available yet?", "Not yet. It is coming to the App Store and Google Play, and this site will link to both when it is released."],
     ],

@@ -22,20 +22,20 @@ export const PRODUCTS = [
     status: "soon", // "live" | "soon"
     tagline: "See where your family is, and keep it private.",
     definition:
-      "Where is my people is a family location-sharing app for iPhone and Android. Family members see each other on a live map with battery level and the place they are at, and location is shared only inside the family circle.",
+      "Where is my people is a family location-sharing app for iPhone and Android. Family members see each other on a live map with battery level and the place they are at, and location is shared only inside the family.",
     blurb:
-      "A live family map with battery levels and place badges such as Home, Work and School. Your location is shared only with the people in your family circle. Your latest location and your last 3 days with activity are kept, then removed.",
+      "A live family map with battery levels and place badges such as Home, Work and School. Your location is shared only with the people in your family. Your latest location and your last 3 days with activity are kept, then removed.",
     points: [
       "Live map where each person's pin glides smoothly as they move",
       "Battery level and place badges (Home, Work, School) for every family member",
-      "Only your family circle can see you; history is limited to your last 3 days with activity",
+      "Only your family can see you; history is limited to your last 3 days with activity",
       "Export your data or delete your account at any time, inside the app",
     ],
     facts: [
       ["Status", "Coming soon to the App Store and Google Play"],
       ["Platforms", "iPhone and Android"],
       ["Languages", "16, including English, Tamil, Hindi and Arabic"],
-      ["Who sees your location", "Only the members of your family circle"],
+      ["Who sees your location", "Only the members of your family"],
       ["Location history", "Your last 3 days with activity, per family, then deleted automatically"],
       ["Account required", "Yes (email and password)"],
       ["Age", "For adults 18 and over"],
@@ -49,6 +49,7 @@ export const PRODUCTS = [
     privacyLangs: ALL_LANGS,
     hasDelete: true,
     hasJoin: true, // join.html: what an invite link opens when the app is not installed
+    hasVerified: true, // verified.html: where the signup confirmation link in the email lands (noindex, not in the sitemap)
     // Android App Links (/.well-known/assetlinks.json). The Play App Signing SHA-256 comes from
     // Play Console > Test and release > App integrity; add it here (it is what Play-installed builds
     // are signed with). The upload key is included so builds installed straight from the AAB verify too.
@@ -63,8 +64,8 @@ export const PRODUCTS = [
     supportIntro:
       "If you are experiencing any issues with the app, or want to suggest a new feature, please reach out!",
     faq: [
-      ["Who can see my location?", "Only the active members of your own family circle. Nobody else can see it, and we do not show ads or sell data."],
-      ["Does the app keep a history of where I have been?", "Only a short one. Your family circle can look back over your last 3 days with location activity, as a list or as a route on a map; older history is deleted automatically, and leaving a circle deletes your history for it straight away."],
+      ["Who can see my location?", "Only the active members of your own family. Nobody else can see it, and we do not show ads or sell data."],
+      ["Does the app keep a history of where I have been?", "Only a short one. Your family can look back over your last 3 days with location activity, as a list or as a route on a map; older history is deleted automatically, and leaving a family deletes your history for it straight away."],
       ["Is there an age limit?", "Yes. The app is for adults aged 18 and over."],
       ["How do I delete my account and data?", "Open the app, go to Settings and choose Delete account. You can also request deletion from the account deletion page on this site."],
       ["Can I get a copy of my data?", "Yes. In the app, go to Settings and choose Export my data."],

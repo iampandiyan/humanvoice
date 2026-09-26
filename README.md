@@ -17,6 +17,7 @@ content/                   the privacy policy texts (copied word for word from t
 tools/products.mjs         ALL page text and links for the five apps
 tools/build.mjs            generates the pages, sitemap.xml, robots.txt, llms.txt, site.webmanifest, 404.html
 tools/og.mjs               renders share images and icon PNGs (needs Microsoft Edge or Google Chrome)
+tools/verified-i18n.mjs     text of where-is-my-people/verified.html in 16 languages (the page where the signup email link lands; noindex, not in the sitemap; switched on by `hasVerified` in products.mjs)
 tools/check.mjs            checks links, titles, descriptions, structured data, image alt text, placeholders
 ```
 

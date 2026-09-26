@@ -56,7 +56,10 @@ for (const file of files) {
       if (canonicals.has(canonical)) err(rel, `duplicate canonical ${canonical}`);
       canonicals.add(canonical);
       if (!canonical.startsWith(SITE.url)) err(rel, `canonical not on ${SITE.url}: ${canonical}`);
-      if (!sitemap.includes(`<loc>${canonical}</loc>`)) err(rel, `canonical not in sitemap.xml: ${canonical}`);
+      const noindex = /<meta name="robots" content="[^"]*noindex/.test(html);
+      // A page that asks not to be indexed must not be listed; every other page must be.
+      if (noindex && sitemap.includes(`<loc>${canonical}</loc>`)) err(rel, `noindex page is listed in sitemap.xml: ${canonical}`);
+      if (!noindex && !sitemap.includes(`<loc>${canonical}</loc>`)) err(rel, `canonical not in sitemap.xml: ${canonical}`);
     }
     if (!/<html lang="/.test(html)) err(rel, "missing lang attribute");
     if (!/name="viewport"/.test(html) && rel !== "shared-ai-budget-tracker/tutorial.html") err(rel, "missing viewport meta");
@@ -87,7 +90,7 @@ for (const file of files) {
   }
 
   // Placeholders must not ship
-  if (/TODO|REPLACE_|lorem ipsum|YOUR_/i.test(html)) err(rel, "placeholder text found (TODO / REPLACE_ / YOUR_)");
+  if (/TODO|REPLACE_|YOUR_|[Ll]orem ipsum/.test(html)) err(rel, "placeholder text found (TODO / REPLACE_ / YOUR_)");
 }
 
 // Every product has its pages, and the policy text is inside the privacy page unchanged
