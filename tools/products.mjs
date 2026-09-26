@@ -56,7 +56,7 @@ export const PRODUCTS = [
       package: "com.humanvoice.whereIsMyPeople",
       sha256: [
         "7B:8E:D2:17:7D:92:F6:60:AF:D7:19:30:54:2C:78:A1:3A:3E:A8:E0:0A:B4:8A:BC:64:CA:D0:B6:6C:BE:BA:7D", // upload key
-        // "<Play App Signing key SHA-256 from Play Console>",
+        "F2:97:9E:92:00:D8:C2:1E:AE:0E:AF:7F:01:3B:EB:F5:07:0B:CA:4F:E3:D0:D7:51:F9:4F:33:91:64:5A:55:F7", // Play App Signing key (classical), from Play Console > App integrity
       ],
     },
     deleteFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfK67Y8rMHiaNhyZReLQcsKdPZIbsKaogZmyMwqeYPvBZDrMQ/viewform", // Google Form; the delete page shows it as a request button
