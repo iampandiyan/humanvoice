@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.humanvoice.whereIsMyPeople",
+      "sha256_cert_fingerprints": [
+        "7B:8E:D2:17:7D:92:F6:60:AF:D7:19:30:54:2C:78:A1:3A:3E:A8:E0:0A:B4:8A:BC:64:CA:D0:B6:6C:BE:BA:7D"
+      ]
+    }
+  }
+]

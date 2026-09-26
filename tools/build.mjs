@@ -644,6 +644,64 @@ ${faq.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join("")}
   );
 }
 
+/* ---------- invite link page (Where is my people) ---------- */
+// https://humanvoice.in/<slug>/join?code=... is the link people share. With the app installed on
+// Android the link opens the app (App Link, see buildFiles); otherwise this page shows the code and how
+// to join. The code is read in the browser only, never sent anywhere.
+function buildJoin(p) {
+  const url = `${SITE.url}/${p.slug}/join.html`;
+  const body = `${crumbs(1, [[p.name, "./"], ["Join a circle", null]])}
+<section class="wrap page stack">
+<div class="card">
+<h1>Join a circle on ${esc(p.name)}</h1>
+<p class="lead" id="join-lead">Someone invited you to their family circle. Follow the three steps below.</p>
+<div id="join-code-box" hidden>
+<p>Your invite code</p>
+<p><strong id="join-code" style="font-size:1.8rem;letter-spacing:0.08em;word-break:break-all"></strong></p>
+<p><button class="btn" type="button" id="join-copy">Copy code</button> <span id="join-copied" role="status" aria-live="polite"></span></p>
+</div>
+<ol>
+<li><strong>Get the app.</strong> ${p.stores && p.stores.play ? `<a href="${esc(p.stores.play)}" rel="noopener">Open it on Google Play</a>.` : "The app is being tested and is not on the store yet. If you were invited to the test, use the link from your invitation."}</li>
+<li><strong>Create your account</strong> with your email and a password, and confirm your email.</li>
+<li><strong>Tap "I have an invite code"</strong> and enter the code above. You will be asked to confirm before you join.</li>
+</ol>
+<p>Only the members of a circle can see each other's location, and only after each person joins. You can leave a circle at any time.</p>
+<p>See also: <a href="privacy.html">Privacy policy</a> &middot; <a href="support.html">Support</a></p>
+</div>
+</section>
+<script>
+(function () {
+  try {
+    var code = new URLSearchParams(location.search).get("code");
+    code = code ? code.trim().toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 32) : "";
+    if (!code) return;
+    document.getElementById("join-code").textContent = code;
+    document.getElementById("join-code-box").hidden = false;
+    document.getElementById("join-lead").textContent = "You have been invited to a family circle.";
+    document.getElementById("join-copy").addEventListener("click", function () {
+      var done = function () { document.getElementById("join-copied").textContent = "Copied"; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, done);
+      else done();
+    });
+  } catch (e) {}
+})();
+</script>`;
+  savePage(
+    `${p.slug}/join.html`,
+    shell({
+      depth: 1,
+      title: `Join a circle | ${p.name}`,
+      description: `How to join a family circle on ${p.name}: get the app, create your account, and enter the invite code you were sent.`,
+      canonicalPath: `${p.slug}/join.html`,
+      ogImage: p.img.og,
+      ogAlt: `Join a circle on ${p.name}`,
+      body,
+      jsonLd: [breadcrumbLd([["Home", `${SITE.url}/`], [p.name, `${SITE.url}/${p.slug}/`], ["Join a circle", url]])],
+    }),
+    "0.3"
+  );
+}
+
 /* ---------- guides (how-to articles from tools/guides.mjs) and the /guides/ hub ---------- */
 const guidesFor = (slug) => GUIDES.filter((g) => g.app === slug);
 const productBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
@@ -767,6 +825,12 @@ function buildFiles() {
     ) + "\n"
   );
   write(".nojekyll", "");
+  // Android App Links: tells Android that these apps may open humanvoice.in links directly.
+  const statements = PRODUCTS.filter((p) => p.appLinks && p.appLinks.sha256.length).map((p) => ({
+    relation: ["delegate_permission/common.handle_all_urls"],
+    target: { namespace: "android_app", package_name: p.appLinks.package, sha256_cert_fingerprints: p.appLinks.sha256 },
+  }));
+  if (statements.length) write(".well-known/assetlinks.json", JSON.stringify(statements, null, 2) + "\n");
 }
 
 /* ---------- run ---------- */
@@ -778,6 +842,7 @@ for (const p of PRODUCTS) {
   if (p.hasPrivacy) buildPrivacy(p);
   if (p.hasTerms) buildTerms(p);
   if (p.hasDelete) buildDelete(p);
+  if (p.hasJoin) buildJoin(p);
   if (p.hasTutorial) buildTutorial(p);
 }
 buildGuidesHub();

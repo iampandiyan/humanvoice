@@ -48,6 +48,17 @@ export const PRODUCTS = [
     hasPrivacy: true,
     privacyLangs: ALL_LANGS,
     hasDelete: true,
+    hasJoin: true, // join.html: what an invite link opens when the app is not installed
+    // Android App Links (/.well-known/assetlinks.json). The Play App Signing SHA-256 comes from
+    // Play Console > Test and release > App integrity; add it here (it is what Play-installed builds
+    // are signed with). The upload key is included so builds installed straight from the AAB verify too.
+    appLinks: {
+      package: "com.humanvoice.whereIsMyPeople",
+      sha256: [
+        "7B:8E:D2:17:7D:92:F6:60:AF:D7:19:30:54:2C:78:A1:3A:3E:A8:E0:0A:B4:8A:BC:64:CA:D0:B6:6C:BE:BA:7D", // upload key
+        // "<Play App Signing key SHA-256 from Play Console>",
+      ],
+    },
     deleteFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfK67Y8rMHiaNhyZReLQcsKdPZIbsKaogZmyMwqeYPvBZDrMQ/viewform", // Google Form; the delete page shows it as a request button
     supportIntro:
       "If you are experiencing any issues with the app, or want to suggest a new feature, please reach out!",

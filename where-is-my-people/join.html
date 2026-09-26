@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a circle | Where is my people</title>
+<meta name="description" content="How to join a family circle on Where is my people: get the app, create your account, and enter the invite code you were sent.">
+<link rel="canonical" href="https://humanvoice.in/where-is-my-people/join.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#f3f8fd">
+<meta name="author" content="Karuppasamy Pandiyan Marimuthu">
+<meta property="og:site_name" content="Humanvoice">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Join a circle | Where is my people">
+<meta property="og:description" content="How to join a family circle on Where is my people: get the app, create your account, and enter the invite code you were sent.">
+<meta property="og:url" content="https://humanvoice.in/where-is-my-people/join.html">
+<meta property="og:image" content="https://humanvoice.in/assets/og/where-is-my-people.png">
+<meta property="og:image:alt" content="Join a circle on Where is my people">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Join a circle | Where is my people">
+<meta name="twitter:description" content="How to join a family circle on Where is my people: get the app, create your account, and enter the invite code you were sent.">
+<meta name="twitter:image" content="https://humanvoice.in/assets/og/where-is-my-people.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://humanvoice.in/"},{"@type":"ListItem","position":2,"name":"Where is my people","item":"https://humanvoice.in/where-is-my-people/"},{"@type":"ListItem","position":3,"name":"Join a circle","item":"https://humanvoice.in/where-is-my-people/join.html"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+<a class="brand" href="../">Humanvoice</a>
+<nav class="nav" aria-label="Main"><a href="../#apps">Apps</a><a href="../#contact">Contact</a></nav>
+</div></header>
+<main id="main">
+<nav class="crumbs wrap" aria-label="Breadcrumb"><a href="../">Home</a> &rsaquo; <a href="./">Where is my people</a> &rsaquo; <span aria-current="page">Join a circle</span></nav>
+<section class="wrap page stack">
+<div class="card">
+<h1>Join a circle on Where is my people</h1>
+<p class="lead" id="join-lead">Someone invited you to their family circle. Follow the three steps below.</p>
+<div id="join-code-box" hidden>
+<p>Your invite code</p>
+<p><strong id="join-code" style="font-size:1.8rem;letter-spacing:0.08em;word-break:break-all"></strong></p>
+<p><button class="btn" type="button" id="join-copy">Copy code</button> <span id="join-copied" role="status" aria-live="polite"></span></p>
+</div>
+<ol>
+<li><strong>Get the app.</strong> The app is being tested and is not on the store yet. If you were invited to the test, use the link from your invitation.</li>
+<li><strong>Create your account</strong> with your email and a password, and confirm your email.</li>
+<li><strong>Tap "I have an invite code"</strong> and enter the code above. You will be asked to confirm before you join.</li>
+</ol>
+<p>Only the members of a circle can see each other's location, and only after each person joins. You can leave a circle at any time.</p>
+<p>See also: <a href="privacy.html">Privacy policy</a> &middot; <a href="support.html">Support</a></p>
+</div>
+</section>
+<script>
+(function () {
+  try {
+    var code = new URLSearchParams(location.search).get("code");
+    code = code ? code.trim().toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 32) : "";
+    if (!code) return;
+    document.getElementById("join-code").textContent = code;
+    document.getElementById("join-code-box").hidden = false;
+    document.getElementById("join-lead").textContent = "You have been invited to a family circle.";
+    document.getElementById("join-copy").addEventListener("click", function () {
+      var done = function () { document.getElementById("join-copied").textContent = "Copied"; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, done);
+      else done();
+    });
+  } catch (e) {}
+})();
+</script>
+</main>
+<footer class="site-footer"><div class="wrap">
+<div><strong>Humanvoice</strong> &middot; Simple, privacy-friendly apps for families, parents, professionals and communities.<br>&copy; 2026 Karuppasamy Pandiyan Marimuthu</div>
+<nav aria-label="Guides"><a href="../guides/">Guides</a></nav>
+<nav aria-label="Privacy policies"><span>Privacy:</span><a href="../where-is-my-people/privacy.html">Where is my people</a><a href="../safeplay-video-player/privacy.html">SafePlay Video Player</a><a href="../shared-ai-budget-tracker/privacy.html">Shared AI Budget Tracker</a><a href="../one-on-one-tracker/privacy.html">One On One Tracker</a><a href="../smart-gate/privacy.html">ANPR Smart Gate Tracker</a></nav>
+</div></footer>
+
+</body>
+</html>
