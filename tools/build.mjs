@@ -663,9 +663,9 @@ function buildJoin(p) {
 <ol>
 <li><strong>Get the app.</strong> ${p.stores && p.stores.play ? `<a href="${esc(p.stores.play)}" rel="noopener">Open it on Google Play</a>.` : "The app is being tested and is not on the store yet. If you were invited to the test, use the link from your invitation."}</li>
 <li><strong>Create your account</strong> with your email and a password, and confirm your email.</li>
-<li><strong>Tap "I have an invite code"</strong> and enter the code above. You will be asked to confirm before you join.</li>
+<li><strong>Tap "I have an invite code"</strong> and enter the code above. You will be asked to confirm, and then the circle's owner has to approve your request before you can see anyone.</li>
 </ol>
-<p>Only the members of a circle can see each other's location, and only after each person joins. You can leave a circle at any time.</p>
+<p>Only the members of a circle can see each other's location, and only after the owner has approved each person. You can leave a circle at any time.</p>
 <p>See also: <a href="privacy.html">Privacy policy</a> &middot; <a href="support.html">Support</a></p>
 </div>
 </section>
