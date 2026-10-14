@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bot check | Where is my people</title>
+<meta name="description" content="Technical page that the Where is my people app opens to run Cloudflare's bot check. There is nothing to read or do here.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://humanvoice.in/where-is-my-people/turnstile.html">
+<style>html,body{margin:0;padding:0;background:transparent;font:14px -apple-system,system-ui,sans-serif;color:#555}h1{font-size:14px;font-weight:400;margin:4px}#msg{margin:4px}</style>
+</head>
+<body>
+<h1>Bot check</h1>
+<div id="w"></div>
+<p id="msg"></p>
+<script>
+(function () {
+  var msg = document.getElementById("msg");
+  function bridge() {
+    var b = window.flutter_inappwebview;
+    return b && typeof b.callHandler === "function" ? b : null;
+  }
+  function send(name, value) {
+    var b = bridge();
+    if (b) b.callHandler(name, value);
+  }
+  function begin() {
+    var key = new URLSearchParams(location.search).get("k") || "";
+    if (!/^[0-9A-Za-z_-]{10,64}$/.test(key)) { send("TurnstileError", "110100"); return; }
+    var tries = 0;
+    (function waitForTurnstile() {
+      if (window.turnstile) {
+        var id = window.turnstile.render("#w", {
+          sitekey: key,
+          appearance: "interaction-only",
+          retry: "never",
+          callback: function (token) { send("TurnstileToken", token); },
+          "error-callback": function (code) { send("TurnstileError", String(code)); },
+          "expired-callback": function () { send("TokenExpired"); },
+          "timeout-callback": function () { send("TurnstileError", "110600"); }
+        });
+        send("TurnstileWidgetId", String(id));
+      } else if (++tries < 100) {
+        setTimeout(waitForTurnstile, 100);
+      } else {
+        send("TurnstileError", "-1");
+      }
+    })();
+  }
+  var started = false;
+  function go() { if (!started && bridge()) { started = true; begin(); } }
+  window.addEventListener("flutterInAppWebViewPlatformReady", go);
+  go();
+  setTimeout(function () { go(); if (!started) msg.textContent = "This page runs inside the app."; }, 3000);
+})();
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</body>
+</html>

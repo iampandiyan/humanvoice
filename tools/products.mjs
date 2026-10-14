@@ -50,6 +50,7 @@ export const PRODUCTS = [
     hasDelete: true,
     hasJoin: true, // join.html: what an invite link opens when the app is not installed
     hasVerified: true, // verified.html: where the signup confirmation link in the email lands (noindex, not in the sitemap)
+    hasTurnstile: true, // turnstile.html: bare page the iPhone app loads to run Cloudflare's bot check (noindex, not in the sitemap)
     // Android App Links (/.well-known/assetlinks.json). The Play App Signing SHA-256 comes from
     // Play Console > Test and release > App integrity; add it here (it is what Play-installed builds
     // are signed with). The upload key is included so builds installed straight from the AAB verify too.

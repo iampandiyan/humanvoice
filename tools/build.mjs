@@ -762,6 +762,77 @@ ${store}<p><a href="support.html">Support</a></p>
   );
 }
 
+/* ---------- bot-check page for the iPhone app (Where is my people) ---------- */
+// The iPhone app loads this page by its real https address inside its own web view to run Cloudflare Turnstile
+// (loading the check from inline HTML fails there with error 600010; Cloudflare advises hosting a page).
+// The public site key comes in as ?k=. The page only starts the check when it is opened by the app's web view
+// (window.flutter_inappwebview exists) and hands the token back through that bridge; it stores nothing, sets no
+// cookies and sends nothing anywhere except to Cloudflare. noindex, not in the sitemap. The guard only stops
+// casual use: it is not a security boundary. Written with no backslashes and no ${} so the template stays simple.
+function buildTurnstile(p) {
+  const html = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bot check | ${esc(p.name)}</title>
+<meta name="description" content="Technical page that the ${esc(p.name)} app opens to run Cloudflare's bot check. There is nothing to read or do here.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="${SITE.url}/${p.slug}/turnstile.html">
+<style>html,body{margin:0;padding:0;background:transparent;font:14px -apple-system,system-ui,sans-serif;color:#555}h1{font-size:14px;font-weight:400;margin:4px}#msg{margin:4px}</style>
+</head>
+<body>
+<h1>Bot check</h1>
+<div id="w"></div>
+<p id="msg"></p>
+<script>
+(function () {
+  var msg = document.getElementById("msg");
+  function bridge() {
+    var b = window.flutter_inappwebview;
+    return b && typeof b.callHandler === "function" ? b : null;
+  }
+  function send(name, value) {
+    var b = bridge();
+    if (b) b.callHandler(name, value);
+  }
+  function begin() {
+    var key = new URLSearchParams(location.search).get("k") || "";
+    if (!/^[0-9A-Za-z_-]{10,64}$/.test(key)) { send("TurnstileError", "110100"); return; }
+    var tries = 0;
+    (function waitForTurnstile() {
+      if (window.turnstile) {
+        var id = window.turnstile.render("#w", {
+          sitekey: key,
+          appearance: "interaction-only",
+          retry: "never",
+          callback: function (token) { send("TurnstileToken", token); },
+          "error-callback": function (code) { send("TurnstileError", String(code)); },
+          "expired-callback": function () { send("TokenExpired"); },
+          "timeout-callback": function () { send("TurnstileError", "110600"); }
+        });
+        send("TurnstileWidgetId", String(id));
+      } else if (++tries < 100) {
+        setTimeout(waitForTurnstile, 100);
+      } else {
+        send("TurnstileError", "-1");
+      }
+    })();
+  }
+  var started = false;
+  function go() { if (!started && bridge()) { started = true; begin(); } }
+  window.addEventListener("flutterInAppWebViewPlatformReady", go);
+  go();
+  setTimeout(function () { go(); if (!started) msg.textContent = "This page runs inside the app."; }, 3000);
+})();
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</body>
+</html>
+`;
+  write(`${p.slug}/turnstile.html`, html);
+}
+
 /* ---------- guides (how-to articles from tools/guides.mjs) and the /guides/ hub ---------- */
 const guidesFor = (slug) => GUIDES.filter((g) => g.app === slug);
 const productBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
@@ -904,6 +975,7 @@ for (const p of PRODUCTS) {
   if (p.hasDelete) buildDelete(p);
   if (p.hasJoin) buildJoin(p);
   if (p.hasVerified) buildVerified(p);
+  if (p.hasTurnstile) buildTurnstile(p);
   if (p.hasTutorial) buildTutorial(p);
 }
 buildGuidesHub();
